@@ -1,0 +1,64 @@
+version: "3.8"
+
+services:
+  # Servicios principales
+  backend:
+    container_name: backend
+    image: localhost:5000/backend-ms
+    build:
+      context: .
+      dockerfile: backend/nginx.dockerfile
+    ports:
+      - "9010:80"
+    depends_on:
+      - php-service
+      - mysql-service
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx/:/etc/nginx/conf.d/
+    links:
+      - php-service
+    networks:
+      - net-app-back-back
+
+  php-service:
+    build:
+      context: .
+      dockerfile: backend/php.dockerfile
+    container_name: php-service
+    environment:
+      SERVICE_NAME: php-service
+    networks:
+      - net-app-back-back
+
+  mysql-service:
+    container_name: mysql-service
+    image: mysql:8
+    env_file:
+      - ./env/mysql.env
+    networks:
+      - net-app-back-back
+
+  # Servicios utilitarios
+  composer-service:
+    build:
+      context: .
+      dockerfile: util/composer.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - net-app-back-back
+
+  artisan-service:
+    build:
+      context: .
+      dockerfile: backend/php.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    entrypoint: ["php", "/var/www/html/artisan"]
+    networks:
+      - net-app-back-back
+
+networks:
+  net-app-back-back:
+    driver: bridge
