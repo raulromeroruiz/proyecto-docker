@@ -3,10 +3,10 @@ version: "3.8"
 services:
   # Servicios principales
   nginx:
+    container_name: nginx
     build:
       context: .
       dockerfile: backend/nginx.dockerfile
-    container_name: nginx
     ports:
       - "9010:80"
     depends_on:
@@ -28,8 +28,8 @@ services:
       - internal
 
   mysql-service:
-    image: mysql:8
     container_name: mysql-service
+    image: mysql:8
     env_file:
       - ./env/mysql.env
     networks:
