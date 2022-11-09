@@ -18,3 +18,11 @@ docker compose -f docker-compose-ok.yaml run --rm composer-service update
 ```
 docker compose -f docker-compose-ok.yaml run --rm artisan-service migrate:refresh --seed
 ```
+
+### Si Migrate no funciona poblar indivisualmente las tablas
+
+```
+docker compose -f docker-compose-local.yaml run --rm artisan-service db:seed --class=ArtistTableSeeder
+docker compose -f docker-compose-local.yaml run --rm artisan-service db:seed --class=AlbumTableSeeder
+docker compose -f docker-compose-local.yaml run --rm artisan-service db:seed --class=TrackTableSeeder
+```
