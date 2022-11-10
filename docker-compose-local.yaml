@@ -12,6 +12,8 @@ services:
       - "9010:80"
     depends_on:
       - php-service
+    links:
+      - php-service
     volumes:
       - ./src:/var/www/html
       - ./nginx/:/etc/nginx/conf.d/

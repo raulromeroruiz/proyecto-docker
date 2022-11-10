@@ -12,12 +12,9 @@ services:
       - "9010:80"
     depends_on:
       - php-service
-      - mysql-service
     volumes:
       - ./src:/var/www/html
       - ./nginx/:/etc/nginx/conf.d/
-    links:
-      - php-service
     networks:
       - net-app-back-back
 
@@ -26,8 +23,8 @@ services:
       context: .
       dockerfile: backend/php.dockerfile
     container_name: php-service
-    environment:
-      SERVICE_NAME: php-service
+    depends_on:
+      - mysql-service
     networks:
       - net-app-back-back
 
