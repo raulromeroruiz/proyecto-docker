@@ -1,1 +1,6 @@
 src/vendor/
+
+wordpress/wp
+wordpress/wordpress
+data/
+mysql/
