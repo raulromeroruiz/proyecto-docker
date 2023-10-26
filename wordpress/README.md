@@ -18,7 +18,7 @@ Rename **.env-sample** file to **.env**, then change the values:
 | Variable             | Value                                         |
 |----------------------|-----------------------------------------------|
 | MYSQL_HOST           | _*Hostname Service for MySQL*_                |
-| MYSQL_VERSION        | _*Version for MySQL (Current using 5.7.26)*_  |
+| MYSQL_VERSION        | _*Version for MySQL (Current using 8)*_  |
 | MYSQL_ROOT_PASSWORD  | _*Password for MySQL server (User is root)*_  |
 | MYSQL_DATABASE       | _*Database name for Wordpress*_               |
 | MYSQL_USER           | _*Admin user for Database Wordpress*_         |
